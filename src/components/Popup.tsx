@@ -12,7 +12,7 @@ interface PopupProps {
 export default function Popup({ target, x, y }: PopupProps) {
   return (
     <div
-      className="absolute bg-[#1b1b1b] text-white p-3 rounded shadow-lg z-20 max-w-xs cursor-pointer"
+      className="absolute bg-[#1b1b1b] text-white p-3 rounded shadow-lg z-20 min-w-3xs max-w-xs cursor-pointer"
       style={{ left: x, top: y }}
     >
       <div className="font-bold">{target.data.name}</div>
