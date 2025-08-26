@@ -74,5 +74,31 @@ export const contests: Contest[] = [
       { name: "Famous Choreographer", index: "G", status: ProblemStatus.Solved, notes: "Solved after the contest. Main issue was reading the problem statement, but the samples and explanations were key. Observe that the original matrix will be placed at one of the corners of the new matrix. Also, adding rows to the bottom and right sides of the matrix is equivalent to removing rows from the top and left sides. Thus, for each of the four rotations of the matrix, find the minimum answer over all possible ways to remove those rows. Note that checking 180 degree equivalence is equivalent to checking if the string formed by reading the submatrix in row order is a palindrome. Can use hashing to check that. Store the hashes for the forward and reverse directions of the string formed by the submatrix, then use those to find the answer. Also need to use a strong hashing technique to avoid hacks during the open hacking period." },
     ],
   },
+
+  {
+    name: "CF Round 1045",
+    notes: `
+      My 88th Codeforces Contest. Alright ranking, set to gain a small amount of rating,
+      but definitely not my best performance. I was interrupted a couple of times in the
+      contest. Once time, I had to go outside and grab something. When I came back, I
+      realized I was more focused than usual on the problems. Maybe the stress from
+      the timer decreasing in value was helpful, or a small amount of physical activity
+      outside was the main reason. Either way, I should consider performing similar
+      activities before contests in the future (e.g. going for a run, as SecondThread
+      has mentioned doing before). This was a fairly typical "SpeedForces" round, where
+      solving the first few problems fast was the difference between a master-level performance
+      and a pupil/specialist-level performance. I don't plan to specifically prepare
+      for these types of contests, and instead expect the average contest to involve
+      more thinking and techniques than speed.
+    `,
+    problems: [
+      { name: "Painting With Two Colors", index: "A", status: ProblemStatus.Solved, notes: "Typical codeforces casework problem. Be careful to read the 'If a cell is painted both...' and find the solution through constructing examples." },
+      { name: "Add 0 or K", index: "B", status: ProblemStatus.Solved, notes: "Worked with k=2 and k=3 cases to find a general approach of setting all values to 0 modulo some value close to k. It turns out that you can just use k+1 as that value. Since k is congruent to -1 modulo k+1, you can add k a[i]%(k+1) times to a[i] to make a[i]%(k+1) = 0." },
+      { name: "Even Larger", index: "C", status: ProblemStatus.Solved, notes: "I recently saw a problem like this where the solution was to only consider subarrays of size 2 and 3. This is also a standard approach is many other problems such as performing operations to remove all palindromes from a string (the \"middle\" of a palindrome is always a palindrome of length 2 or 3). The order in which the values should be processed is intuitive, but this solution leads to a lot of casework and a lot of code in general. Instead, you can notice that the 'worst case' for the sum is when you have two odd-indexed values and one even-indexed value. You can then greedily choose the largest possible value for each of the odd-indexed values by observing these adjacent cases (at most 2 of them). It works to greedily process these values from left to right and increase because any increase that you do not take earlier would otherwise be taken 2 indices later which could only 'worsen the situation', so to speak." },
+      { name: "Sliding Tree", index: "D", status: ProblemStatus.Solved, notes: "Consider some property of the tree that changes between the initial tree and the final path graph. In this case, the diameter of the tree is an obvious choice. In turns out that you can increase the diameter of the tree by 1 with every operation and that every operation that increases the diameter by 1 can be used in the optimal sequence. Thus, find any such operation. To do this, compute any diameter of the tree. There is some 'branch' off of the diameter if and only if the tree is not a path graph already. Find such a branch by traversing the diameter. If there is no such branch, then the tree is a path graph." },
+      { name: "Power Boxes", index: "E", status: ProblemStatus.Solved, notes: "If we know the number of bounces for indices i+1 and i+2, then we can also find the value at index i by throwing a ball there. Call the number of bounces at index i dp[i]. Then, process the indices in decreasing order. If dp[i+1] != dp[i+2], then find dp[i] by throwing a ball at i. Otherwise, we know that dp[i] = dp[{i+1, i+2}]+1 and mark this index to compute later. If we marked index i+1, then swap i and i+1 so now dp[i+1] != dp[i+2] and we can query i to find a[i] (previous was a[i+1], which we marked). In case the a[1] was marked, swap 1 with 2 and query at 2. This works because there cannot be three consecutive equivalent values of dp[i], so there can only be n/2 marked indices. Thus we use about n+n/2=3n/2 queries." },
+      { name: "Permutation Oddness", index: "F", status: ProblemStatus.NotAttempted, notes: "Did not attempt." },
+    ],
+  }
 ];
 
