@@ -4,6 +4,7 @@ export enum ProblemStatus {
   NeedsImplementation = "Needs implementation",
   VeryHard = "Very hard",
   NotAttempted = "Not attempted",
+  AttemptLater = "Attempt later",
 }
 
 export interface Problem {

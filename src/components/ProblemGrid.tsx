@@ -19,6 +19,7 @@ export default function ContestGrid() {
     [ProblemStatus.NeedsImplementation]: "bg-orange-400",
     [ProblemStatus.VeryHard]: "bg-red-400",
     [ProblemStatus.NotAttempted]: "bg-[#2a2a2a]",
+    [ProblemStatus.AttemptLater]: "bg-[#474747]",
   };
 
   const containerRef = useRef<HTMLDivElement>(null);
