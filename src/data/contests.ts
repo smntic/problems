@@ -98,7 +98,7 @@ export const contests: Contest[] = [
   {
     name: "CF Round 1045",
     notes: `
-      My 88th Codeforces Contest. Alright ranking, set to gain a small amount of rating,
+      My 88th Codeforces contest. Alright ranking, set to gain a small amount of rating,
       but definitely not my best performance. I was interrupted a couple of times in the
       contest. Once time, I had to go outside and grab something. When I came back, I
       realized I was more focused than usual on the problems. Maybe the stress from
@@ -118,6 +118,32 @@ export const contests: Contest[] = [
       { name: "Sliding Tree", index: "D", status: ProblemStatus.Solved, notes: "Consider some property of the tree that changes between the initial tree and the final path graph. In this case, the diameter of the tree is an obvious choice. In turns out that you can increase the diameter of the tree by 1 with every operation and that every operation that increases the diameter by 1 can be used in the optimal sequence. Thus, find any such operation. To do this, compute any diameter of the tree. There is some 'branch' off of the diameter if and only if the tree is not a path graph already. Find such a branch by traversing the diameter. If there is no such branch, then the tree is a path graph." },
       { name: "Power Boxes", index: "E", status: ProblemStatus.Solved, notes: "If we know the number of bounces for indices i+1 and i+2, then we can also find the value at index i by throwing a ball there. Call the number of bounces at index i dp[i]. Then, process the indices in decreasing order. If dp[i+1] != dp[i+2], then find dp[i] by throwing a ball at i. Otherwise, we know that dp[i] = dp[{i+1, i+2}]+1 and mark this index to compute later. If we marked index i+1, then swap i and i+1 so now dp[i+1] != dp[i+2] and we can query i to find a[i] (previous was a[i+1], which we marked). In case the a[1] was marked, swap 1 with 2 and query at 2. This works because there cannot be three consecutive equivalent values of dp[i], so there can only be n/2 marked indices. Thus we use about n+n/2=3n/2 queries." },
       { name: "Permutation Oddness", index: "F", status: ProblemStatus.NotAttempted, notes: "Did not attempt." },
+    ],
+  },
+
+  {
+    name: "CF Round 1046",
+    notes: `
+      My 89th Codeforces contest. This felt like a much better contest than any of my previous
+      10+ rounds (excluding the div 3) because I was more focused and able to solve more problems.
+      I'm now on a 3-contest positive delta streak, which I haven't accomplished since April (last
+      time I was candidate master on the platform). My slow solving of D prevented me from
+      focusing on F1, which turned out to be a pretty simple problem. I mostly struggled with getting
+      stuck on certain problems (B and D) where I felt like I could never think of a better approach.
+      However, I kept thinking about the problems regardless and, albeit quite slowly, came up with
+      the right approaches to those problems in the end."
+    `,
+    problems: [
+      { name: "In the Dream", index: "2A", status: ProblemStatus.Solved, notes: "Can compute the second-half scores using the information given. Then, the higher-scoring team can at most get 2+2*<the other team's score>. E.g. if team A and B are playing, then the goals could look like AABAABAABAABAA, which is (AA)+(BAA)^N." },
+      { name: "Like the Bitset", index: "2B", status: ProblemStatus.Solved, notes: "I felt like I would never solve this problem and this was going to kill my performance. However, I kept finding small observations regardless and eventually found a solution. If there is a group of ones of size |ones| >= k, then you can position the range entirely within that group to create a contradiction (every element must be greater than all the other ones). Thus, there cannot be any groups of size |ones| >= k. Otherwise, every range will contain at least one index i such that s[i] = 0. Thus, assign those values numbers larger than all the values assigned to the indices with s[i] = 1. The main observation that helped me solve the problem was about the group sizes. Once I proved that condition, it was easy to find the rest of the solution." },
+      { name: "Against the Difference", index: "1A", status: ProblemStatus.Solved, notes: "At some point, I realized that you have O(n) 'ranges' that represent which values you take. You want to maximize the sum of the ranges' values without overlapping any. Thus, the problem reduces to a classical DP problem. You can also think of it more directly as dp[i] considers two transitions: take the current value as part of a new block or leave it and take dp[i+1]." },
+      { name: "For the Champion", index: "1B", status: ProblemStatus.Solved, notes: "Considering all the points is a mess. Maybe there is a way to isolate one point? Move up and right by 2*10^9 each. Now, the closest point is the same point as the one closest to the corner at (10^9, 10^9). Subtract that point's distance from the latest query answer to get the distance from the robot's current position to the top-right corner. Let this distance be d1=dx+dy. It is not possible to find the answer with any standard techniques like binary search, and you should not use the other points too much (you also have to solve the problem for n=1). Thus, we need some new information. Move left by 4*10^9 to arrive at the top-left corner. Now the distance to the corner (-10^9, 10^9) is d2=(2*10^9-x)+y. We know d1 and d2 so we can solve for x and y. Since we know where the position of the corner and the robot's offset from that position, we can solve find the robot's position. It might help on these problems to write code iteratively. Otherwise, I write a bunch of code and then get lost in debugging it. Walking through the code slowly allowed me to see what the problem was and submit my code. However, about 70% of my time on this problem was trying to find the x and y offsets, and implementation only took 30% of the time (though, I am guessing the proportions)." },
+      { name: "By the Assignment", index: "1C", status: ProblemStatus.Solved, notes: "There is only one possible path on a non-cyclic part of the graph, so we only really have to consider the cycles. In a cycle of even length, all the nodes' values must be equal. In a cycle of odd length, those values must also be 0. We can split the graph into 2-edge-connected components (bridge tree nodes) and solve for each component independently. All the values in each component must be the same, and the values in a component with any odd-length cycle must be 0. You can find whether a component has an odd-length cycle by trying to construct a bipartite colouring. If that fails, then there is an odd-length cycle somewhere in the component." },
+      { name: "From the Unknown (Easy Version)", index: "1D1", status: ProblemStatus.Solved, notes: "If we query with a = [1, 1, 1, 1, ..., 1] and |a| = k, where k = 10^5, then we get l = ceil(10^5/w). You can convert this equality into an inequality l-1 < k/w <= l and solve for w: ceil(k/l) <= w < ceil(k/(l-1))-1. Let L = ceil(k/l) and R = ceil(k/(l-1))-1. There are R-L+1 possible values for w. Note that 2L >= R <=> L >= R-L. We can think about checking each possible value. To check whether w > L, we can query a = [L, 1]. To check whether W > L+1, we can query a = [L, 2]. We can repeat this process and combine all these queries into one: a = [L, 1, L, 2, L, 3, ..., L, R-L]. It works to combine them because we know that L+1+L > 2L >= R >= w, so each query will start on a new line. The number of lines then tells you many of the inequalities w > x are true for x in [L, R]." },
+      { name: "From the Unknown (Hard Version)", index: "1D2", status: ProblemStatus.AttemptLater, notes: "An interesting problem to think about..." },
+      { name: "Beyond the Palindrome (Easy Version)", index: "1E1", status: ProblemStatus.NotAttempted },
+      { name: "Beyond the Palindrome (Hard Version)", index: "1E2", status: ProblemStatus.NotAttempted },
+      { name: "To the Infinity", index: "1F", status: ProblemStatus.NotAttempted },
     ],
   }
 ];
