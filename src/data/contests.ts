@@ -55,6 +55,75 @@ export const contests: Contest[] = [
   },
 
   {
+    name: "CCC 2023",
+    notes: `
+      My first CCC contest. I wrote the senior division for this contest.
+      I took this contest about 4 months after starting in
+      competitive programming. I solved the first problem fine, but was unable
+      to come up with a more efficient approach to the second problem. I also
+      found a couple subtask points on S3.
+    `,
+    problems: [
+      { name: "Deliv-e-droid", index: "J1", status: ProblemStatus.Solved, notes: "Typical first problem in the junior contest. Read the input, do the thing, output the answer." },
+      { name: "Chili Peppers", index: "J2", status: ProblemStatus.Solved, notes: "Copy-paste the values into a map. Then process the strings and add their values." },
+      { name: "Special Event", index: "J3", status: ProblemStatus.Solved, notes: "Read the input, do the thing, output the answer..." },
+      { name: "CCC Word Hunt", index: "J5", status: ProblemStatus.Solved, notes: "You can either brute force all possible word positions, or use DP. If you choose DP, be very careful with the state and transitions. Maybe use something like dp(r, c, idx, turned, dir)." },
+      { name: "Trianglane", index: "S1", status: ProblemStatus.Solved, notes: "I find it easier to consider adding all the tape and then removing the overlapping tape. Add 3*<the number of ones>, then subtract 2*(<the number of horizontally-adjacent ones> + <the number of vertically-adjacent ones at odd-indexed positions (1-based)>)." },
+      { name: "Symmetric Mountains", index: "S2", status: ProblemStatus.Solved, notes: "There are O(n) center positions and you can expand out of each of them. To make the implementation simpler, you can add zeros between every value. Then, iterate over all the center positions and compute the sum of the differences at the left and right indices as you expand the range." },
+      { name: "Palindromic Poster", index: "S3", status: ProblemStatus.AttemptLater, notes: "So much casework. Is there a way to simplify the problem?" },
+      { name: "Minimum Cost Roads", index: "S4", status: ProblemStatus.AttemptLater, notes: "Use Kruskal's algorithm and add edges iff cur_dist[x][y] > prev_dist[x][y] and edge.l == prev_dist[x][y]. This doesn't work for some reason. Could either be my approach or my implementation." },
+      { name: "The Filter", index: "S5", status: ProblemStatus.AttemptLater, notes: "First subtask is fairly easy. The rest seem much harder. Note that 1/12 is in the set, despite being unable to be represented as p/q with gcd(p, q) = 1 and q as a power of 3." },
+    ],
+  },
+
+  {
+    name: "CCC 2024",
+    notes: `
+      My second and last official CCC contest. I started by reading S4
+      and S5 and writing down any initial observations/ideas. Then, I wanted
+      to solve S1, S2 and S3. I got through S1 and S2 fine, but when I got to S3
+      I thought I solved a similar problem shortly before that contest (~1 week before),
+      so I implemented the same approach I used for that problem. Turned out that
+      I never solved that problem either. The stress of the contest got to me and
+      I ended with 34/75 points after securing a couple additional subtask points on S5.
+    `,
+    problems: [
+      { name: "Conveyor Belt Sushi", index: "J1", status: ProblemStatus.Solved, notes: "Read the input, do the thing, output the answer." },
+      { name: "Dusa And The Yobis", index: "J2", status: ProblemStatus.Solved, notes: "Read input using a while loop. E.g. while (cin >> v) { ... }." },
+      { name: "Bronze Count", index: "J3", status: ProblemStatus.Solved, notes: "Find the third largest value, then count the number of times it occurs. You can sort the array and iterate to find those." },
+      { name: "Troublesome Keys", index: "J4", status: ProblemStatus.Solved, notes: "Think about what you can find first. Let the set of characters in s be ss and the set of characters in t be st. We know that ss != st. Since the silly key was used at least once, there is exactly one character in st that is not in ss. We cannot know anything about the contrary at this point. However, we can find the first index i such that s[i] != t[i] and determine whether this was a silly key or quiet key press based on t[i]. Then, we can process the rest of the string and find the rest of the information." },
+      { name: "Harvest Waterloo", index: "J5", status: ProblemStatus.Solved, notes: "Damn, that was boring. Just flood fill." },
+      { name: "Hat Circle", index: "S1", status: ProblemStatus.Solved, notes: "Took me 5 minutes to debug for some reason in the actual contest. This time, it took me 30 seconds. Just iterate over all indices i in [1, N] and check with j = (i+N/2)%N." },
+      { name: "Heavy-Light Composition", index: "S2", status: ProblemStatus.Solved, notes: "Be careful with the input format. Otherwise, just compute the counts and iterate through the string." },
+      { name: "Swipe", index: "S3", status: ProblemStatus.Solved, notes: "Observe that if you take an index i to the right, you cannot use elements before i on the right. Same with swipes to the left. Thus, try to use every element in a as much as possible. You can use two pointers: j pointer for current element in a and normal for loop for index i in b. Then, move the j pointer if and only if a[j] != b[i]. We can also compute the operations using j and i. Be careful with output since it wants 0-based indexing. This problem effectively killed me before, but now I can easily solve it." },
+      { name: "Painting Roads", index: "S4", status: ProblemStatus.Solved, notes: "Run DFS on the graph (make sure you visit each component). Consider all the nodes adjacent to the current node. If any are unvisited, visit them immediately. Toggle the colour for each call to DFS (same colour for all outgoing edges of the current node). If you already visited one of the adjacent nodes, that node must be a parent of this node in the DFS tree (i.e. it must be somewhere in the call stack). This means that there is a path from the current node to that node by taking each node's parent (i.e. popping from the call stack). Since we toggle the colour in each DFS call, that path has alternating edge colours." },
+      { name: "Chocolate Bar Partition", index: "S5", status: ProblemStatus.AttemptLater, notes: "Difficult DP state and transitions. Note that you can get 12/15 points without concerning about an O(n) algorithm." },
+    ],
+  },
+
+  {
+    name: "CCC 2025",
+    notes: `
+      By far my best CCC performance but I definitely got lucky on the third problem
+      being heavily based on data structures. Also, I participated unofficially because I am old.
+      Got 10 points on S4 and 2 points on S5 to get a total of 57/75 points,
+      which is huge progress from the last two years' contests.
+    `,
+    problems: [
+      { name: "Roller Coaster Ride", index: "J1", status: ProblemStatus.Solved, notes: "One line of python code, probably." },
+      { name: "Donut Shop", index: "J2", status: ProblemStatus.Solved, notes: "Why do I ever write notes for these problems???" },
+      { name: "Product Codes", index: "J3", status: ProblemStatus.Solved, notes: "Read the problem statement carefully. Iterate through the string and keep track of the current number (if any) and the rest of the string. Note that, e.g., '73-2' should be 73 - 2 = 71." },
+      { name: "Sunny Days", index: "J4", status: ProblemStatus.Solved, notes: "Be very careful when it says 'exactly one day'. If all the days are reported as 'S', then one of them is still wrong." },
+      { name: "Connecting Territories", index: "J5", status: ProblemStatus.NeedsReview, notes: "For some reason, you only ever take one value per row. Thus, you can use DP where your transition is to take one of the <= 3 paths from the current tile. Note that storing the entire DP state in memory at once would probably MLE. Instead, you only need to consider the current row and the next row each time. Should review why this assumption works." },
+      { name: "Positioning Peter's Paintings", index: "S1", status: ProblemStatus.Solved, notes: "After carefully thinking about the problems (just visual a few examples really), you can reduce it to exactly two cases and then take the minimum of those." },
+      { name: "Cryptogram Cracking Club", index: "S2", status: ProblemStatus.Solved, notes: "You can use `char c; int v; while (cin >> c) { cin >> v; ... }` for reading input (though you probably need to cin >> string first then use istringstream...). Compute the total length then take index modulo that length. Then find the character in one pass." },
+      { name: "Pretty Pens", index: "S3", status: ProblemStatus.Solved, notes: "Generalize the updates and use them to build the initial array as well. You can remove the contribution for the answer for everything affected, then update, then add the contributions back. Note that the multiset `count` function is linear with respect to the number of equivalent items in the multiset." },
+      { name: "Floor is Lava", index: "S4", status: ProblemStatus.Solved, notes: "Consider the line graph of the given graph. The weights of this new graph are the differences of the temperatures of the two edges. Being within a 'node' of the line graph is equivalent to being able to freely access any of the adjacent nodes in the original graph; thus, the problems are equivalent. However, the number of edges in this graph is far too many. Instead, we can observe that, for a node with incident edges of temperatures a <= b <= c, the path out of a and into c is equivalent to the path out of a, into b, out of b, then into c. Thus, we can sort all the incident edges by temperature and only add edges in the line graph between edges with adjacent temperature values." },
+      { name: "To-Do List", index: "S5", status: ProblemStatus.AttemptLater, notes: "It is optimal to always be doing homework whenever possible. Treat the homework tasks as segments that can move to the right but not left. Adding a segment might move some other segments around, and thus merge some 'groups' of segments together. In each group, maintain the earliest start position of a segment and the sum of the segment lengths. Whenever a new segment is added that overlaps with an existing group, or a group expands to overlap with other segments, join the segments together. This can be implemented in O(qlogq) time complexity. However, I have yet to find a way to handle the removal queries." },
+    ],
+  },
+
+  {
     name: "CF Round 1043",
     notes: `
       My 87th Codeforces contest. Second best rank of all time, though it was a div 3.

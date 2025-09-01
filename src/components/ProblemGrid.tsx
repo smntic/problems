@@ -5,6 +5,7 @@ import { PopupTarget, ProblemStatus } from "@/types";
 import { contests } from "@/data/contests";
 import ContestRow from "@/components/ContestRow";
 import Popup from "@/components/Popup";
+import { samePopupTarget } from "@/lib/types-util";
 
 export default function ContestGrid() {
   const cellBorder = "border-[#1a1a1a]";
@@ -26,13 +27,21 @@ export default function ContestGrid() {
   const [selected, setSelected] = useState<{ target: PopupTarget; x: number; y: number } | null>(null);
 
   useEffect(() => {
-    const handleClick = () => setSelected(null);
+    const handleClick = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setSelected(null);
+      }
+    };
     document.addEventListener("mouseup", handleClick);
     return () => document.removeEventListener("mouseup", handleClick);
   }, []);
 
   const handleClick = (target: PopupTarget, x: number, y: number) => {
     if (!containerRef.current) return;
+    if (selected && samePopupTarget(selected.target, target)) {
+      setSelected(null);
+      return;
+    }
     const containerRect = containerRef.current.getBoundingClientRect();
     setSelected({ target, x: x - containerRect.left, y: y - containerRect.top });
   };
