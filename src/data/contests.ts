@@ -27,6 +27,33 @@ export const contests: Contest[] = [
   },
 
   {
+    name: "PacNW 2022",
+    notes: `
+      Our first regionals practice contest with all three of us (Finnick, Andy and myself).
+      We solved four problems (A, C, F, J), one of which was non-trivial. We need to work
+      on figuring out which problems we should focus on (whether that be through the scoreboard
+      or by intuition), since, in this contest, we spent a lot of time on problems
+      that not very many people solved (e.g., I, which went unsolved in the official contest).
+      We were close to tieing with a previous SFU team who solved one more problem (D) than us.
+    `,
+    problems: [
+      { name: "Three Dice", index: "A", status: ProblemStatus.AttemptLater, notes: "Andy and Finnick solved this and I don't know how." },
+      { name: "Alchemy", index: "B", status: ProblemStatus.AttemptLater, notes: "A greedy approach does not seem to work." },
+      { name: "Champernowne Count", index: "C", status: ProblemStatus.Solved, notes: "k|n <=> n%k == 0. Maintain the value modulo k. Appending another number to the current number is equivalent to multiplying by ten for the length of the number and then adding the number." },
+      { name: "Triangle Containment", index: "D", status: ProblemStatus.Solved, notes: "Consider L=(0,0), R=(x,0) and P=the query point. A point being in the interior of the triangle is equivalent to the point being CW to LP and CCW to RP. Those sets can overlap, though. Iterate over the points in CW order relative to L. As you process them, 'deactivate' them by setting their values to 0. This covers the first restriction of the point must be CW to LP. For the other restriction, you can sort the points radially relative to R instead, and binary search to find the first point CCW to RP. Then, take the range query of the remaining points. Any 'deactivated' points have their values set to 0 so this covers both requirements. You can store the values in a segment tree and use range queries." },
+      { name: "Color Tubes", index: "E", status: ProblemStatus.Solved, notes: "Clear the rightmost tube by moving all balls into empty spaces on the left. Then, fill the empty tube with one colour. You must find a colour that occurs at the top of another tube and the two others are not both at the bottom of some tubes. It is guaranteed that there exists one, since there can only be floor(|remaining tubes|/2) invalid colours. Move the top instances, then the middle instances, then the bottom instances. If there are other colours in the way, move them to an empty spot first. It is guaranteed that there are enough empty spots if you process the balls in this order. Then, repeat this process excluding the rightmost tube." },
+      { name: "Food Processor", index: "F", status: ProblemStatus.Solved, notes: "It is always optimal to use the blade with the lowest half-life that we can use. Thus, sort the blades by their maximum size and process the blades in decreasing order of max size, using the best usable blade to access other blades. The time it takes to reduce the sizes can be computed using basic high school pre-calculus." },
+      { name: "Digits of Unity", index: "G", status: ProblemStatus.AttemptLater, notes: "Andy and Finnick worked on this problem for a while, for some reason." },
+      { name: "Branch Manager", index: "H", status: ProblemStatus.AttemptLater },
+      { name: "Counting Satellites", index: "I", status: ProblemStatus.AttemptLater, notes: "Finnick and I worked on this problem for a while because it seemed like a relatively-simple strings problem. Went unsolved in the actual contest." },
+      { name: "Sun and Moon", index: "J", status: ProblemStatus.NeedsReview, notes: "The constraints allow you to iterate over all the possible times and check whether each are valid. You can also use chinese remainder theorem. Should review the CRT approach." },
+      { name: "Advertising ICPC", index: "K", status: ProblemStatus.AttemptLater, notes: "Seemed easy to brute force this during the contest, but we couldn't find anything useful." },
+      { name: "Exponent Exchange", index: "L", status: ProblemStatus.NotAttempted },
+      { name: "Lone Knight", index: "M", status: ProblemStatus.AttemptLater, notes: "I think Andy will upsolve this." },
+    ],
+  },
+
+  {
     name: "PacNW 2023",
     notes: `
       Second regional contest practice with Andy. Solved 3 problems in 3.5 hours.
