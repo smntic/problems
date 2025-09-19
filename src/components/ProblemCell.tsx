@@ -14,6 +14,7 @@ interface ProblemCellProps {
 export default function ProblemCell({ problem, cellSize, borderClass, statusColor, onClick }: ProblemCellProps) {
   return (
     <div
+      title={`${problem.index}. ${problem.name} (${problem.status})`}
       style={{ width: `${cellSize}em`, height: `${cellSize}em` }}
       className={`flex items-center justify-center border ${borderClass} cursor-pointer ${statusColor[problem.status]}`}
       onClick={(e) => {
