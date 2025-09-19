@@ -37,19 +37,19 @@ export const contests: Contest[] = [
       We were close to tieing with a previous SFU team who solved one more problem (D) than us.
     `,
     problems: [
-      { name: "Three Dice", index: "A", status: ProblemStatus.AttemptLater, notes: "Andy and Finnick solved this and I don't know how." },
-      { name: "Alchemy", index: "B", status: ProblemStatus.AttemptLater, notes: "A greedy approach does not seem to work." },
+      { name: "Three Dice", index: "A", status: ProblemStatus.NeedsImplementation, notes: "There are only 18/((6!)^3*3) different assignments, so you can brute force them all while ensuring that all the constraints are still satisfied." },
+      { name: "Alchemy", index: "B", status: ProblemStatus.NeedsImplementation, notes: "A greedy approach does not work. Instead, you can use a very simple DP approach." },
       { name: "Champernowne Count", index: "C", status: ProblemStatus.Solved, notes: "k|n <=> n%k == 0. Maintain the value modulo k. Appending another number to the current number is equivalent to multiplying by ten for the length of the number and then adding the number." },
       { name: "Triangle Containment", index: "D", status: ProblemStatus.Solved, notes: "Consider L=(0,0), R=(x,0) and P=the query point. A point being in the interior of the triangle is equivalent to the point being CW to LP and CCW to RP. Those sets can overlap, though. Iterate over the points in CW order relative to L. As you process them, 'deactivate' them by setting their values to 0. This covers the first restriction of the point must be CW to LP. For the other restriction, you can sort the points radially relative to R instead, and binary search to find the first point CCW to RP. Then, take the range query of the remaining points. Any 'deactivated' points have their values set to 0 so this covers both requirements. You can store the values in a segment tree and use range queries." },
       { name: "Color Tubes", index: "E", status: ProblemStatus.Solved, notes: "Clear the rightmost tube by moving all balls into empty spaces on the left. Then, fill the empty tube with one colour. You must find a colour that occurs at the top of another tube and the two others are not both at the bottom of some tubes. It is guaranteed that there exists one, since there can only be floor(|remaining tubes|/2) invalid colours. Move the top instances, then the middle instances, then the bottom instances. If there are other colours in the way, move them to an empty spot first. It is guaranteed that there are enough empty spots if you process the balls in this order. Then, repeat this process excluding the rightmost tube." },
       { name: "Food Processor", index: "F", status: ProblemStatus.Solved, notes: "It is always optimal to use the blade with the lowest half-life that we can use. Thus, sort the blades by their maximum size and process the blades in decreasing order of max size, using the best usable blade to access other blades. The time it takes to reduce the sizes can be computed using basic high school pre-calculus." },
-      { name: "Digits of Unity", index: "G", status: ProblemStatus.AttemptLater, notes: "Andy and Finnick worked on this problem for a while, for some reason." },
-      { name: "Branch Manager", index: "H", status: ProblemStatus.AttemptLater },
-      { name: "Counting Satellites", index: "I", status: ProblemStatus.AttemptLater, notes: "Finnick and I worked on this problem for a while because it seemed like a relatively-simple strings problem. Went unsolved in the actual contest." },
+      { name: "Digits of Unity", index: "G", status: ProblemStatus.AttemptLater, notes: "You can solve this problem using a classical inclusion-exclusion approach." },
+      { name: "Branch Manager", index: "H", status: ProblemStatus.AttemptLater, notes: "No one observed this problem... during contest or after." },
+      { name: "Counting Satellites", index: "I", status: ProblemStatus.NotAttempted },
       { name: "Sun and Moon", index: "J", status: ProblemStatus.NeedsReview, notes: "The constraints allow you to iterate over all the possible times and check whether each are valid. You can also use chinese remainder theorem. Should review the CRT approach." },
-      { name: "Advertising ICPC", index: "K", status: ProblemStatus.AttemptLater, notes: "Seemed easy to brute force this during the contest, but we couldn't find anything useful." },
+      { name: "Advertising ICPC", index: "K", status: ProblemStatus.NeedsImplementation, notes: "Given the small constraints, you can store the previous row of values in your DP state. This is all you need to know where any of the important ICPC-able locations are." },
       { name: "Exponent Exchange", index: "L", status: ProblemStatus.NotAttempted },
-      { name: "Lone Knight", index: "M", status: ProblemStatus.AttemptLater, notes: "I think Andy will upsolve this." },
+      { name: "Lone Knight", index: "M", status: ProblemStatus.NotAttempted },
     ],
   },
 
@@ -78,6 +78,31 @@ export const contests: Contest[] = [
       { name: "Sequence Guessing", index: "K", status: ProblemStatus.Solved, notes: "It may be helpful to view the sequence instead as a binary string where an index is 1 if that value is included in the sequence and is 0 otherwise. In the binary string, the first and last values must be ones and there cannot be any two adjacent zeros. Note that we are required to print the index of each correctly-guessed value, which limits our options. Ideally, there would be a tactic such that the indexes are always fixed and don't provide any useful information about the sequence. One such way is to consider the values in triplets. Set the first value to 1 and do not fix the other two values yet. We can select one of the latter two values to be a 0 and the other to be a 1 later. Notice how this fixes the indexing, so it is impossible to gain any information from the indexing, and preserves the property that there cannot be two adjacent zeros. Among the latter two values, set whichever one was first guessed to be a 0, and set the other to a 1. Repeat this pattern of threes over the entire binary string (first three, second three, etc.). Since there are 33333 triplets and we can force at least one miss per triplet, the interactor will always miss at least 33333 times." },
       { name: "Training", index: "L", status: ProblemStatus.Solved, notes: "The simplest problem in terms of implementation, but the greedy approach was non-trivial. However, it was intuitively correct, so we tried it and proved by AC." },
       { name: "Triple Sevens", index: "M", status: ProblemStatus.Solved, notes: "First problem we solved. We need to be able to find these simple problems first and implement them quickly to minimize penalty." },
+    ],
+  },
+
+  {
+    name: "ECNA 2022",
+    notes: `
+      Our second full-team regional practice contets. We solved five problems (C, D, F, G, I),
+      and probably could have solved A, B, J and K given more time (we had 3 hours). This would
+      have placed us in the top 20 teams in the real contest. While only a hypothetical placement,
+      this is still a strong result already. We briefly checked the scoreboard which helped us
+      know which problems to focus on.
+    `,
+    problems: [
+      { name: "A-Mazing Puzzle", index: "A", status: ProblemStatus.Solved, notes: "This is obviously BFS-able. Since rotations are free, you just need to know the offset between the two robots' rotations. Then, you can visit the states and iterate through the possible rotations (4). This gives a O((rc)^2) algorithm" },
+      { name: "A Musical Question", index: "B", status: ProblemStatus.Solved, notes: "Note the time limit is... 11 seconds?! This is obviously the classical knapsack-DP problem. You can use states of (idx, cd_1_sum, cd_2_sum) and dp over those states. That gives an O(nc^2) algorithm. nc^2 itself is 10^9, but (10^9 ops)/(2*10^8 ops/second) = 5 seconds... so you can just use that. Also, you can optimize this code using bitsets: the transitions then become left-shifts and bitwise ors." },
+      { name: "Cribbage On Steroids", index: "C", status: ProblemStatus.Solved, notes: "You can solve each part of the problem independently. Pairs are obvious. Sum-to-15 can be solved using DP (state: (idx, sum)). Runs can be solved by finding the counts of each card value and adding the product of the non-zero counts." },
+      { name: "Determining Nucleotide Assortments", index: "D", status: ProblemStatus.Solved, notes: "You can solve this using prefix sums." },
+      { name: "Hilbert’s Hedge Maze", index: "E", status: ProblemStatus.NotAttempted },
+      { name: "It’s About Time", index: "F", status: ProblemStatus.AttemptLater, notes: "Reading comprehension problem. You can just iterate over n1, n2 and n3 and find which best approximates the tropical years." },
+      { name: "Pea Pattern", index: "G", status: ProblemStatus.Solved, notes: "You can iterate through the numbers and manually calculate the next string by finding the counts of each present digit. The strings are intuitively short and there cannot be more than 100 numbers in a sequence before finding a repetition." },
+      { name: "Picking Up Steam", index: "H", status: ProblemStatus.NotAttempted },
+      { name: "Road To Savings", index: "I", status: ProblemStatus.Solved, notes: "An edge is on some shortest path if the minimum length of a path that goes from the start to the edge and then to the end is the same length as the shortest path between the start and the end. We can use the Floyd-Warshall algorithm to find solve the all-pairs shortest path problem and use that information to determine which edges are on a shortest path." },
+      { name: "Simple Solitaire", index: "J", status: ProblemStatus.AttemptLater },
+      { name: "Two Charts Become One", index: "K", status: ProblemStatus.AttemptLater },
+      { name: "Which Warehouse?", index: "L", status: ProblemStatus.NotAttempted },
     ],
   },
 
