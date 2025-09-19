@@ -24,11 +24,12 @@ export default function ContestGrid() {
   };
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const popupRef = useRef<HTMLDivElement>(null);
   const [selected, setSelected] = useState<{ target: PopupTarget; x: number; y: number } | null>(null);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      if (popupRef.current && !popupRef.current.contains(e.target as Node)) {
         setSelected(null);
       }
     };
@@ -63,7 +64,11 @@ export default function ContestGrid() {
         ))}
       </div>
 
-      {selected && <Popup target={selected.target} x={selected.x} y={selected.y} />}
+      {selected && (
+        <div ref={popupRef}>
+          <Popup target={selected.target} x={selected.x} y={selected.y} />
+        </div>
+      )}
     </div>
   );
 }
