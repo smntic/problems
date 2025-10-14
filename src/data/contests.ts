@@ -27,6 +27,33 @@ export const contests: Contest[] = [
   },
 
   {
+    name: "NAQ 2025",
+    notes: `
+      Our first official contest! We did alright, solving 10 problems of 13 total. I was pretty
+      happy with our performance but we could have solved a couple more problems given a bit more
+      time to think about them (B and H). This is not to mention to technical issues that prevented
+      us from viewing the problemset for the first 51 minutes and prevented us from submitting
+      until 112 minutes into the contest, by which point most teams from UC Berkeley probably already
+      AK'D 🤣.
+    `,
+    problems: [
+      { name: "Art Installation", index: "A", status: ProblemStatus.Solved, notes: "Compute the required additional LEDs of each colour. Then, you can greedily use as many of the rg and gb types as necessary to get the remaining red and blue LEDs. Then use the rest for the green. This works because nothing else can be used for the red and blue LEDs." },
+      { name: "Backup Towers", index: "B", status: ProblemStatus.Solved, notes: "You can maintain the two best results found for each tile, or some other value (e.g., {inf, -1}) if the result has not been found yet ('empty result'). If you use multi-source BFS and insert the towers into the queue by increasing index, then you guarantee that, when you find a transition into an empty result, the current result *is* that result. Then, you push the other tile back into the queue if and only if you inserted some result into it, because, otherwise, there is nothing to improve on." },
+      { name: "Call for Problems, Round 2", index: "C", status: ProblemStatus.Solved, notes: "The number of unique problems in total can be found using a set. Then the number of unique problems chosen is the min of that and the number of problems chosen, k." },
+      { name: "Carl's Maze-Solving Algorithm", index: "D", status: ProblemStatus.Solved, notes: "You can directly simulate the algorithm. It works if and only if Carl does not get stuck in a loop, so you can maintain which positions and rotations he has visited before and make sure he doesn't visit one twice." },
+      { name: "Curling", index: "E", status: ProblemStatus.Solved, notes: "Sort the points based on distance from the center position and compute the score based on that." },
+      { name: "Figure Skating Judging", index: "F", status: ProblemStatus.Solved, notes: "This uses a similar technique to ECNA 2023 problem B. It is optimal to choose a contiguous range of scores in the sorted scores. Then, the mean can be computed from the sum and the rest can be found by expanding (x-y)^2 = x^2 - 2xy + y^2." },
+      { name: "Mingle", index: "G", status: ProblemStatus.Solved, notes: "Using linearity of expectation, the expected number of winners is the sum of the probabilities over all states where a person ends up in a position alone. For each person, iterate over the possible positions where they could end up alone and compute the probability that they end up alone as the product of the probability that they end up there and everyone else does not end up there. In fact, the probability is symmetric with respect to both the person and the position, so you can compute the probability for one person at one position and multiply by n*(2k+1)." },
+      { name: "Seesaw", index: "H", status: ProblemStatus.Solved, notes: "You need some way to maintain 'groups' of weights and find them by positions and highest 'value'. The value of a group is the amount of torque you can 'fix' by moving the group by 1 unit, and is defined as <total_weight>/<group_size>. Then, it is always optimal to move the group with the highest value when possible and necessary. When the groups collide, merge them together. It is never optimal to separate a group (if we have groups of size x, y with x > y then x moves into y and forms a group with (x+y)/2 effect, then x > y => (x+y)/2 > y instead, not < y, which would be the only case in which separating could help; another way to view this is to imagine that x > y and x grouped with y but then it is more optimal to separate y from the group and move it on it's own, but this then creates two groups, where x is again > y, so x should now move instead. Thus, you move y a little bit, then move x until it groups again... which is equivalent to moving them as one group). As for implementation, you can assume that you are always moving to the right and negate all the positions otherwise. You can store pointers to some struct in two sets, one for position and one for effect, and store iterators from the sets in the structs so everything can be safely removed and deleted." },
+      { name: "Star Guardians", index: "I", status: ProblemStatus.Solved, notes: "Iterate through the bitmasks representing which players are included in the team and compute the value." },
+      { name: "Ten Player Bingo", index: "J", status: ProblemStatus.Solved, notes: "The answer is just the last value modulo 10 except when that's zero in which case it's 10." },
+      { name: "Treasure Hunt", index: "K", status: ProblemStatus.Solved, notes: "My initial idea was to query the four corners of the middle 3x3 subgrid, but that would not provide enough remaining queries to find the top-left corner. Instead, note that the result of the last corner can be determined by the results of the other 3 corners. Then, find the top-left corner with two more queries." },
+      { name: "Triple Jump", index: "L", status: ProblemStatus.Solved, notes: "Let d1, d2 and d3 be the jump distance options. The first distance must be d1*3 because it is the smallest, the second must be d1*2+d2 because it is the second smallest, and the last must be d3*3 because it is the largest." },
+      { name: "Utopia Relationships", index: "M", status: ProblemStatus.AttemptLater, notes: "Magic flows? P = NP? Or just LP? Or some silly flows technique?" },
+    ],
+  },
+
+  {
     name: "PacNW 2022",
     notes: `
       Our first regionals practice contest with all three of us (Finnick, Andy and myself).
@@ -75,16 +102,42 @@ export const contests: Contest[] = [
       { name: "On-Call Team", index: "H", status: ProblemStatus.Solved, notes: "Can be easily solved using Hall's Marriage Theorem. The robustness level is at least k if and only if for every set of k services, there are at least k engineers who can work with any of those services. To improve the runtime from O(n2^m) to O(nm + m^3), stop checking for more engineers when you already have k of them (stop iterating over more edges from the services in the current subset)." },
       { name: "Range Editing", index: "I", status: ProblemStatus.Solved, notes: "I had an idea during the contest that was close to the intended solution but was too complicated to implement. There is a simpler (and possibly more correct) method. Let dp[l][r] be the cost of setting the range a[l..r] to their desired values when some prefix of a[l..r] is set to a[l]. Iterate over a middle index m representing where that prefix stops. Then update dp[l][r] with dp[l][m] + dp[m+1][r] and add 1 if and only if a[l] != a[m+1] since the prefix can continue into the next part. Technically, I believe you can ignore the continuation logic and simply ignore those transitions, but this approach is simpler." },
       { name: "Segment Drawing", index: "J", status: ProblemStatus.NotAttempted, notes: "Another intimidating geometry problem." },
-      { name: "Sequence Guessing", index: "K", status: ProblemStatus.Solved, notes: "It may be helpful to view the sequence instead as a binary string where an index is 1 if that value is included in the sequence and is 0 otherwise. In the binary string, the first and last values must be ones and there cannot be any two adjacent zeros. Note that we are required to print the index of each correctly-guessed value, which limits our options. Ideally, there would be a tactic such that the indexes are always fixed and don't provide any useful information about the sequence. One such way is to consider the values in triplets. Set the first value to 1 and do not fix the other two values yet. We can select one of the latter two values to be a 0 and the other to be a 1 later. Notice how this fixes the indexing, so it is impossible to gain any information from the indexing, and preserves the property that there cannot be two adjacent zeros. Among the latter two values, set whichever one was first guessed to be a 0, and set the other to a 1. Repeat this pattern of threes over the entire binary string (first three, second three, etc.). Since there are 33333 triplets and we can force at least one miss per triplet, the interactor will always miss at least 33333 times." },
+      { name: "Sequence Guessing", index: "K", status: ProblemStatus.Solved, notes: "It may be helpful to view the sequence instead as a binary string where an index is 1 if that value is included in the sequence and is 0 otherwise. In the binary string, the first and last values must be ones and there cannot be any two adjacent zeros. Note that we are required to print the index of each correctly-guessed value, which limits our options. Ideally, there would be a tactic such that the indices are always fixed and don't provide any useful information about the sequence. One such way is to consider the values in triplets. Set the first value to 1 and do not fix the other two values yet. We can select one of the latter two values to be a 0 and the other to be a 1 later. Notice how this fixes the indexing, so it is impossible to gain any information from the indexing, and preserves the property that there cannot be two adjacent zeros. Among the latter two values, set whichever one was first guessed to be a 0, and set the other to a 1. Repeat this pattern of threes over the entire binary string (first three, second three, etc.). Since there are 33333 triplets and we can force at least one miss per triplet, the interactor will always miss at least 33333 times." },
       { name: "Training", index: "L", status: ProblemStatus.Solved, notes: "The simplest problem in terms of implementation, but the greedy approach was non-trivial. However, it was intuitively correct, so we tried it and proved by AC." },
       { name: "Triple Sevens", index: "M", status: ProblemStatus.Solved, notes: "First problem we solved. We need to be able to find these simple problems first and implement them quickly to minimize penalty." },
     ],
   },
 
   {
+    name: "ECNA 2021",
+    notes: `
+      Our third full-team regional practice contest. We solved A, B, G and J in contest and
+      probably could have solved at least 3 more given more time (we used half the contest time).
+      This would have been another top 20 placement (again, hypothetical, but still strong).
+      We need to focus on easier problems and not let ourselves (and our teammates) get stuck
+      working on problems that we are not likely to solve.
+    `,
+    problems: [
+      { name: "1's For All", index: "A", status: ProblemStatus.Solved, notes: "The time limit (15 seconds) allows you to brute force over the DP transitions. Use dp(n) as the minimum number of ones required to form n. You can also apparently optimize by using addition transitions only with adding 1, 11, 111, 1111, etc... which is how I now have the fastest submission to this problem on QOJ." },
+      { name: "Abridged Reading", index: "B", status: ProblemStatus.Solved, notes: "Obvious reduction to a DAG. Each node has at most one parent, however, meaning that this is more specifically a directed rooted tree. You want to choose two paths from some roots (could have multiple components) ending at two different leaf nodes such that the sum of the values of the nodes which appear on either path is minimal. For every node, store the sum of values from the root of a node's tree to the node itself. Then, the cost for nodes x and y is sum[x] + sum[y] - sum[lca(x, y)] by inclusion-exclusion principle." },
+      { name: "Ball of Whacks", index: "C", status: ProblemStatus.AttemptLater, notes: "Andy will explain it." },
+      { name: "Downsizing", index: "D", status: ProblemStatus.NotAttempted },
+      { name: "Gambling Game", index: "E", status: ProblemStatus.AttemptLater, notes: "Probability problem" },
+      { name: "Growing Some Oobleck", index: "F", status: ProblemStatus.Solved, notes: "Keep an array of all the circles and their properties at the current time. You can find the next time by finding the minimum t using dist <= r1+r2+t(dr1+dr2). Then, when you find one intersection, find all the intersections (guaranteed to form one component) and compute the new circle. Keep iterating locally until there are no more intersections. Repeat this process until there is only one circle left." },
+      { name: "Noonerized Spumbers", index: "G", status: ProblemStatus.Solved, notes: "Brute force all the possible valid ways to swap the prefixes of any two numbers. When you find one that is valid, report it." },
+      { name: "Numble", index: "H", status: ProblemStatus.VeryHard, notes: "Unsolved in the actual contest. It seems to require a lot of implementation." },
+      { name: "Pinned Files", index: "I", status: ProblemStatus.NeedsReview, notes: "I'll come back to this later..." },
+      { name: "Recycling", index: "J", status: ProblemStatus.NeedsReview, notes: "There are many ways to solve this. One such way is to process the values in non-decreasing order and maintain the sizes of all ranges that do not contain any values already processed (which would be smaller than the current value), and use that to compute the answer. I should review the stack-based approach." },
+      { name: "Stable Table", index: "K", status: ProblemStatus.Solved, notes: "Treat the table as a directed graph, where an edge from x to y means that node x can physically support y in the structure. Then the problem becomes finding the minimum number of nodes to include such that there is a path from the root (the floor) to each top node. You can break this set of nodes down into a path shared by the two top nodes and two divergent paths, iterate over the middle node and sum the nodes in those three paths using distances given by BFS." },
+      { name: "Statues", index: "L", status: ProblemStatus.Solved, notes: "Try all the corners (you can simplify this to be one corner with rotations). On each diagonal, find the set of values that are currently on the diagonal, and the set that should be on the diagonal according to the sorted order. Then the number of statues on that diagonal that need to move is |current|-|current intersect required|." },
+      { name: "Tomb Hater", index: "M", status: ProblemStatus.AttemptLater, notes: "Finnick tried to solve this problem for far too long." },
+    ],
+  },
+
+  {
     name: "ECNA 2022",
     notes: `
-      Our second full-team regional practice contets. We solved five problems (C, D, F, G, I),
+      Our second full-team regional practice contest. We solved five problems (C, D, F, G, I),
       and probably could have solved A, B, J and K given more time (we had 3 hours). This would
       have placed us in the top 20 teams in the real contest. While only a hypothetical placement,
       this is still a strong result already. We briefly checked the scoreboard which helped us
