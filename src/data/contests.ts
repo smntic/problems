@@ -54,6 +54,31 @@ export const contests: Contest[] = [
   },
 
   {
+    name: "PacNW 2021",
+    notes: `
+      We did pretty well on this contest, but there were a couple problems where
+      we were very slow (G and H) and one problem that we easily could have solved but apparently
+      absolutely no one read it (J). Also, I was getting precision errors on L that
+      I didn't resolve until after the contest.
+    `,
+    problems: [
+      { name: "Circle Bounce", index: "A", status: ProblemStatus.NeedsImplementation, notes: "Note that the angle and thus the arc length between different bounces is always the same. Thus, you can solve it via a few similar methods, but the easiest is probably to compute the complex number representing the point of the first bounce and then taking powers of that complex number to rotate the point around the unit circle." },
+      { name: "Shortest Missing Subsequences", index: "B", status: ProblemStatus.Solved, notes: "Track at each position the next occurence of each letter (if no more appearances, set it to something past the end of the string). Then, the shortest missing subsequence can be found by greedily adding the characters that move the position the furthest in the string. Since the total number of query characters is small, you can check whether the query strings are subsequences of the string by repeatedly jumping to the next occurence of each character." },
+      { name: "XOR Island", index: "C", status: ProblemStatus.Solved, notes: "The only information each person can gather is from everyone else, and, really, the only information they can gain is whether they are part of a triplet. We consider the problem through hypothetical scenarios, saying \"what if person X was not in a triplet?\" We can do this with bitmasks, where person i is being considered iff there is a 1 in the i-th bit. E.g., person 1 considers mask^1 and how many days would it take for someone to raise their hand in that scenario. Then, if that many days pass and still no one raises their hand, person 1 can conclude they are necessarily in a triplet (modus tollens)." },
+      { name: "Archery Accuracy", index: "D", status: ProblemStatus.Solved, notes: "Arranging the archers is a fairly trivial problem using bitmasks. It is always optimal to maximize the probability that the current archer will end at the positive threshold. The rest of the problem is to compute the probability that the current archer will end up at the positive threshold. This is the gambler's ruin problem and can be computed via markov chains or a closed-form formula." },
+      { name: "Problem Set Construction", index: "E", status: ProblemStatus.NotAttempted },
+      { name: "Rise and Fall", index: "F", status: ProblemStatus.Solved, notes: "Match the original string until you find an non-decreasing sequence following a non-increasing sequence, at which point you should repeat the last digit of the non-increasing sequence." },
+      { name: "Hopscotch 500", index: "G", status: ProblemStatus.Solved, notes: "Determine the set of positions corresponding to each distance value from an arbitrary point. That forms up to four distinct lines. Proceed in increasing order of the tile values. After each value, compute the minimum distance along each row and column and iterate through rows and columns when finding transitions." },
+      { name: "Reversibly Cyclic Strings", index: "H", status: ProblemStatus.NeedsReview, notes: "You can just check whether the reverse of the string is a cycle of the original string. I just made a really good guess. I should review why this works." },
+      { name: "Diagonals", index: "I", status: ProblemStatus.VeryHard, notes: "No one solved this in the actual contest." },
+      { name: "Fail Them All!", index: "J", status: ProblemStatus.NotAttempted, notes: "If you give a student the correct answer on some problem, then they should either not have responded or have given the incorrect answer on the other problems. Thus, the problem reduces to 2-SAT. To find an assignment, iterate through the problems and try to assign F first, then if that fails try to assign T. If both fail, it is impossible to find any assignment. You need not concern about new actions contradicting with past actions because you chose the locally-optimal action in the past and can DFS in the 2-SAT graph to check for any possible contradictions. You could also probably find SCCs, but this is much simpler." },
+      { name: "Tournament Seeding", index: "K", status: ProblemStatus.AttemptLater, notes: "Andy solved this one, but I am not quite sure how." },
+      { name: "Dorm Room Divide", index: "L", status: ProblemStatus.Solved, notes: "The wall must be drawn from the door to some point on another wall. Iterate through the walls in counter-clockwise order to check whether including the triangle associated with that wall will cause the area to exceed 1/2 of the total. If that is not the case, you can add the triangle to the area and proceed to the next wall. If it does exceed, you have a couple options for how to find the correct point along the wall. One is to use binary search with an absurd amount of precision (can use python's Decimal class). A preferable method is to use the fact that, when dividing a triangle from an angle, the ratio of the areas is equivalent to the ratio of the base lengths." },
+      { name: "Tree Hopping", index: "M", status: ProblemStatus.Solved, notes: "You could solve the problem with LCAs and computing the distance between two nodes as the distance from the LCA to each of the nodes. However, another way is to iteratively step through the LCA process but only take 1 step at a time. This is sufficient to pass because you must do this at most 3 times. Thus, you can just compute the immediate parent of each node, instead of all the parents at distances that are powers of 2 (as done for LCA with binary lifting)." },
+    ],
+  },
+
+  {
     name: "PacNW 2022",
     notes: `
       Our first regionals practice contest with all three of us (Finnick, Andy and myself).
